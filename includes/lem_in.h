@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anerus <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/13 17:12:37 by anerus            #+#    #+#             */
+/*   Updated: 2019/04/13 17:13:13 by anerus           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LEM_IN_H
+# define LEM_IN_H
+
+# include "../libft/libft.h"
+# define ERROR {write(1, "ERROR\n", 6); return (0);}
+
+typedef struct			s_info
+{
+	int					num_ants;
+	int					room;
+	int					coord_x;
+	int					coord_y;
+}						t_info;
+
+typedef struct		s_neighbour
+{
+	int					num;
+	struct s_neighbour	*next;
+}					t_neighbour;
+
+typedef struct		s_lst
+{
+	int					num;
+	struct s_lst		*next;
+	struct s_neighbour	*links;
+}					t_lst;
+
+t_info					g_inf;
+t_lst					*g_lst;
+
+int		valid_rooms(char *str);
+void	lst_create(void);
+int		valid_links(char *str);
+void	links_create(int a, int b);
+
+#endif
