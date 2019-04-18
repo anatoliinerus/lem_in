@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = anerus
+NAME = lem-in
 
 FLAGS = -Wall -Werror -Wextra
 
-SRC = src/main.c src/valid.c
+SRC = src/main.c src/valid.c src/algorithm.c
 
 OBJ = $(SRC:%.c=%.o) 
 

@@ -35,6 +35,7 @@ typedef struct		s_lst
 	int					num;
 	struct s_lst		*next;
 	struct s_neighbour	*links;
+	short int			visited;// | start > 1 | end < 1 | visited == 1 |
 }					t_lst;
 
 t_info					g_inf;
