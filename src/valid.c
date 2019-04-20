@@ -56,8 +56,10 @@ int	valid_rooms(char *str)
 	int i;
 
 	i = -1;
+	if (ft_word_count(str, ' ') != 3)
+		return (0);
 	while (str[++i] != ' ')
-		if (!ft_isdigit(str[i]))
+		if (!ft_isascii(str[i]))
 			return (0);
 	while (str[++i] != ' ')
 		if (!ft_isdigit(str[i]))
@@ -65,10 +67,11 @@ int	valid_rooms(char *str)
 	while (str[++i])
 		if (!ft_isdigit(str[i]))
 			return (0);
-	if (!(g_inf.room = ft_atoi(str)) ||
-	!(g_inf.coord_y = ft_atoi(ft_strchr(str, ' '))) ||
-	!(g_inf.coord_x = ft_atoi(ft_strrchr(str, ' '))))
-		return (0);
+	if (!g_inf.room)
+		g_inf.room = ft_strnew(30);
+	g_inf.room = ft_strncpy(g_inf.room, str, ft_strchr(str, ' ') - str);
+	g_inf.coord_y = ft_atoi(ft_strchr(str, ' '));
+	g_inf.coord_x = ft_atoi(ft_strrchr(str, ' '));
 	return (1);
 }
 
@@ -111,13 +114,16 @@ void	lst_create(void)
 	if (!g_lst)
 	{
 		g_lst = ft_memalloc(sizeof(t_lst));
-		g_lst->num = g_inf.room;
+		g_lst->room = g_inf.room;
+		g_lst->num = 1;
+		g_inf.num = 1;
 		g_lst->next = NULL;
 	}
 	else
 	{
 		new = ft_memalloc(sizeof(t_lst));
-		new->num = g_inf.room;
+		g_lst->room = g_inf.room;
+		new->num = ++g_inf.num;
 		new->next = NULL;
 		tmp = g_lst;
 		while (tmp->next != NULL)
@@ -126,13 +132,13 @@ void	lst_create(void)
 	}
 	// printf("%d\n%d %d %d\n", g_inf.num_ants, g_inf.room, g_inf.coord_y, g_inf.coord_x);
 	
-	// t_lst *test;
+	t_lst *test;
 
-	// test = g_lst;
-	// printf("%d\n", test->num);
-	// while (test->next != NULL)
-	// {
-	// 	test = test->next;
-	// 	printf("%d\n", test->num);
-	// }
+	test = g_lst;
+	printf("%d\n", test->num);
+	while (test->next != NULL)
+	{
+		test = test->next;
+		printf("%d\n", test->num);
+	}
 }

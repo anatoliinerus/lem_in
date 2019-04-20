@@ -19,7 +19,8 @@
 typedef struct			s_info
 {
 	int					num_ants;
-	int					room;
+	char				*room;
+	int					num;
 	int					coord_x;
 	int					coord_y;
 }						t_info;
@@ -33,6 +34,7 @@ typedef struct		s_neighbour
 typedef struct		s_lst
 {
 	int					num;
+	char				*room;
 	struct s_lst		*next;
 	struct s_neighbour	*links;
 	short int			visited;// | start > 1 | end < 1 | visited == 1 |
