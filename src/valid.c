@@ -15,39 +15,46 @@
 int	valid_links(char *str)
 {
 	int i;
+	char *argv1;
 
 	i = -1;
+	if (ft_word_count(str, '-') != 2)
+		return (0);
 	while (str[++i] != '-')
-		if (!ft_isdigit(str[i]))
+		if (!ft_isascii(str[i]))
 			return (0);
 	while (str[++i])
-		if (!ft_isdigit(str[i]))
+		if (!ft_isascii(str[i]))
 			return (0);
-	links_create(ft_atoi(str), ft_atoi(ft_strrchr(str, '-') + 1));
-	links_create(ft_atoi(ft_strrchr(str, '-') + 1), ft_atoi(str));
+	argv1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
+	links_create(argv1, ft_strchr(str, '-') + 1);
+	links_create(ft_strchr(str, '-') + 1, argv1);
+	ft_strdel(&argv1);
 	     
-	      t_lst *tmp;
-          t_neighbour *tmp2;
+	      // t_lst *tmp;
+       //    t_neighbour *tmp2;
 
-          tmp = g_lst;
-          printf("|%d|\n", tmp->num);
-          while (tmp)
-          {
-              tmp2 = tmp->links;
-              if (tmp2)
-              {
-                 printf("%d\n", tmp2->num);
-          	while (tmp2->next != NULL)    /// for print my lists
-          	{
-          		tmp2 = tmp2->next;
-          		printf("%d\n", tmp2->num);
-          	}
-          	}
-              if (!tmp->next)
-              	break ;
-          	tmp = tmp->next;
-          	printf("|%d|\n", tmp->num);
-          }
+       //    tmp = g_lst;
+       //    printf("|%d|\n", tmp->num);
+       //    printf("|%s|\n", tmp->room);
+       //    while (tmp)
+       //    {
+       //        tmp2 = tmp->links;
+       //        if (tmp2)
+       //        {
+       //           printf("%d\n", tmp2->num);
+       //           // printf("%s\n", tmp2->room);
+       //    	while (tmp2->next != NULL)    /// for print my lists
+       //    	{
+       //    		tmp2 = tmp2->next;
+       //    		printf("%d\n", tmp2->num);
+       //    	}
+       //    	}
+       //    	if (!tmp->next)
+       //        	break ;
+       //    	tmp = tmp->next;
+       //    	printf("|%d|\n", tmp->num);
+       //    }
 	return (1);
 }
 
@@ -69,24 +76,25 @@ int	valid_rooms(char *str)
 			return (0);
 	if (!g_inf.room)
 		g_inf.room = ft_strnew(30);
-	g_inf.room = ft_strncpy(g_inf.room, str, ft_strchr(str, ' ') - str);
+	ft_strclr(g_inf.room);
+	g_inf.room = strncpy(g_inf.room, str, strchr(str, ' ') - str);
 	g_inf.coord_y = ft_atoi(ft_strchr(str, ' '));
 	g_inf.coord_x = ft_atoi(ft_strrchr(str, ' '));
 	return (1);
 }
 
-void	links_create(int a, int b)
+void	links_create(char *a, char *b)
 {
 	t_neighbour	*tmp;
 	t_lst		*lmp;
 
 	lmp = g_lst;
-	while (lmp->num != b)
+	while (!ft_strequ(lmp->room, b))
 		lmp = lmp->next;
 	if (!lmp->links)
 	{
 		lmp->links = ft_memalloc(sizeof(t_neighbour));
-		lmp->links->num = a;
+		lmp->links->room = ft_strdup(a);
 		lmp->links->next = NULL;
 	}
 	else
@@ -94,14 +102,14 @@ void	links_create(int a, int b)
 		tmp = lmp->links;
 		while (tmp->next != NULL)
 		{
-			if (tmp->num == b || tmp->num == a)
+			if (!ft_strcmp(tmp->room, b) || !ft_strcmp(tmp->room, a))
 				return ;
 			tmp = tmp->next;
 		}
-		if (tmp->num == b || tmp->num == a)
+		if (!ft_strcmp(tmp->room, b) || !ft_strcmp(tmp->room, a))
 			return ;
 		tmp->next = ft_memalloc(sizeof(t_neighbour));
-		tmp->next->num = a;
+		tmp->next->room = ft_strdup(a);
 		tmp->next->next = NULL;
 	}
 }
@@ -115,14 +123,14 @@ void	lst_create(void)
 	{
 		g_lst = ft_memalloc(sizeof(t_lst));
 		g_lst->room = g_inf.room;
-		g_lst->num = 1;
-		g_inf.num = 1;
+		g_lst->num = 0;
+		g_inf.num = 0;
 		g_lst->next = NULL;
 	}
 	else
 	{
 		new = ft_memalloc(sizeof(t_lst));
-		g_lst->room = g_inf.room;
+		new->room = g_inf.room;
 		new->num = ++g_inf.num;
 		new->next = NULL;
 		tmp = g_lst;
@@ -130,15 +138,23 @@ void	lst_create(void)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	// printf("%d\n%d %d %d\n", g_inf.num_ants, g_inf.room, g_inf.coord_y, g_inf.coord_x);
+	if (!g_inf.start)
+		g_inf.start = g_inf.num;
+	else if (!g_inf.end)
+			g_inf.end = g_inf.num;
+	g_inf.start = 0;//right now don t use
+	g_inf.end = 0;
+	if (!g_inf.room)
+		ft_strdel(&g_inf.room);
+	printf("%d\n|%s| %d %d\n", g_inf.num_ants, g_inf.room, g_inf.coord_y, g_inf.coord_x);
 	
-	t_lst *test;
+	// t_lst *test;
 
-	test = g_lst;
-	printf("%d\n", test->num);
-	while (test->next != NULL)
-	{
-		test = test->next;
-		printf("%d\n", test->num);
-	}
+	// test = g_lst;
+	// printf("%s\n", test->room);
+	// while (test->next != NULL)
+	// {
+	// 	test = test->next;
+	// 	printf("%s\n", test->room);
+	// }
 }

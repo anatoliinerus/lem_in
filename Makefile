@@ -10,29 +10,52 @@
 #                                                                              #
 # **************************************************************************** #
 
+# NAME = lem-in
+
+# FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+
+# SRC = src/main.c src/valid.c src/algorithm.c
+
+# OBJ = $(SRC:%.c=%.o) 
+
+# all: $(NAME)
+
+# %.o:%.c
+# 	@gcc -c $(FLAGS) $< -o $@
+
+# $(NAME): $(OBJ)
+# 	@make -C libft
+# 	@gcc $(OBJ) libft/libft.a -o $(NAME)
+
+# clean: 
+# 	@make clean -C libft
+# 	@rm -f $(OBJ)
+
+# fclean: clean
+# 	@make fclean -C libft
+# 	@rm -f $(NAME)
+
+# re: fclean all
+
+
 NAME = lem-in
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Werror -Wextra -Wall -fsanitize=address -g
 
-SRC = src/main.c src/valid.c src/algorithm.c
-
-OBJ = $(SRC:%.c=%.o) 
 
 all: $(NAME)
 
-%.o:%.c
-	@gcc -c $(FLAGS) $< -o $@
-
-$(NAME): $(OBJ)
+$(NAME):
 	@make -C libft
-	@gcc $(OBJ) libft/libft.a -o $(NAME)
+	@cp ./libft/libft.a ./
+	@gcc $(FLAGS) src/*.c -Iinclude -lft -L./ -o $(NAME)
 
-clean: 
+clean:
+	@rm -rf *.o
 	@make clean -C libft
-	@rm -f $(OBJ)
 
 fclean: clean
+	@rm -rf $(NAME) libft.a
 	@make fclean -C libft
-	@rm -f $(NAME)
 
 re: fclean all

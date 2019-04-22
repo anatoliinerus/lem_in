@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/root/Desktop/lem_in/includes/lem_in.h
+../libft/libft.h
+/root/Desktop/lem_in/libft/libft.h
+
+/root/Desktop/lem_in/libft/libft.h
+unistd.h
+-
+stdlib.h
+-
+stdio.h
+-
+ctype.h
+-
+limits.h
+-
+
+/root/Desktop/lem_in/src/valid.c
+../includes/lem_in.h
+/root/Desktop/lem_in/includes/lem_in.h
+

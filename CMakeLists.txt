@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.13)
-project(Lem_in C)
+cmake_minimum_required(VERSION 3.14)
+project(lem_in C)
 
 set(CMAKE_C_STANDARD 11)
 
 include_directories(includes)
 include_directories(libft)
 
-add_executable(Lem_in
+add_executable(lem_in
         includes/lem_in.h
         libft/ft_atoi.c
         libft/ft_bzero.c
@@ -79,5 +79,6 @@ add_executable(Lem_in
         libft/ft_word_len.c
         libft/get_next_line.c
         libft/libft.h
+        src/algorithm.c
         src/main.c
         src/valid.c)
