@@ -30,31 +30,34 @@ int	valid_links(char *str)
 	links_create(argv1, ft_strchr(str, '-') + 1);
 	links_create(ft_strchr(str, '-') + 1, argv1);
 	ft_strdel(&argv1);
-	     
-	      // t_lst *tmp;
-       //    t_neighbour *tmp2;
 
-       //    tmp = g_lst;
-       //    printf("|%d|\n", tmp->num);
-       //    printf("|%s|\n", tmp->room);
-       //    while (tmp)
-       //    {
-       //        tmp2 = tmp->links;
-       //        if (tmp2)
-       //        {
-       //           printf("%d\n", tmp2->num);
-       //           // printf("%s\n", tmp2->room);
-       //    	while (tmp2->next != NULL)    /// for print my lists
-       //    	{
-       //    		tmp2 = tmp2->next;
-       //    		printf("%d\n", tmp2->num);
-       //    	}
-       //    	}
-       //    	if (!tmp->next)
-       //        	break ;
-       //    	tmp = tmp->next;
-       //    	printf("|%d|\n", tmp->num);
-       //    }
+
+
+	     
+	      t_lst *tmp;
+          t_neighbour *tmp2;
+
+          tmp = g_lst;
+          // printf("|%d|\n", tmp->num);
+          printf("|%s|\n", tmp->room);
+          while (tmp)
+          {
+              tmp2 = tmp->links;
+              if (tmp2)
+              {
+                 // printf("%d\n", tmp2->num);
+                 printf("%s\n", tmp2->room);
+          	while (tmp2->next != NULL)    /// for print my lists
+          	{
+          		tmp2 = tmp2->next;
+          		printf("%s\n", tmp2->room);
+          	}
+          	}
+          	if (!tmp->next)
+              	break ;
+          	tmp = tmp->next;
+          	printf("|%s|\n", tmp->room);
+          }
 	return (1);
 }
 
@@ -122,7 +125,7 @@ void	lst_create(void)
 	if (!g_lst)
 	{
 		g_lst = ft_memalloc(sizeof(t_lst));
-		g_lst->room = g_inf.room;
+		g_lst->room = ft_strdup(g_inf.room);
 		g_lst->num = 0;
 		g_inf.num = 0;
 		g_lst->next = NULL;
@@ -130,7 +133,7 @@ void	lst_create(void)
 	else
 	{
 		new = ft_memalloc(sizeof(t_lst));
-		new->room = g_inf.room;
+		new->room = ft_strdup(g_inf.room);
 		new->num = ++g_inf.num;
 		new->next = NULL;
 		tmp = g_lst;
@@ -146,7 +149,7 @@ void	lst_create(void)
 	g_inf.end = 0;
 	if (!g_inf.room)
 		ft_strdel(&g_inf.room);
-	printf("%d\n|%s| %d %d\n", g_inf.num_ants, g_inf.room, g_inf.coord_y, g_inf.coord_x);
+	// printf("|%s| %d %d\n", g_inf.room, g_inf.coord_y, g_inf.coord_x);
 	
 	// t_lst *test;
 
