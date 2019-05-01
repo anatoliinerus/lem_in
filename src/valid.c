@@ -58,6 +58,7 @@ int	valid_links(char *str)
           	tmp = tmp->next;
           	printf("|%s|\n", tmp->room);
           }
+          printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
 	return (1);
 }
 
@@ -129,6 +130,7 @@ void	lst_create(void)
 		g_lst->num = 0;
 		g_inf.num = 0;
 		g_lst->next = NULL;
+		new = g_lst;
 	}
 	else
 	{
@@ -141,12 +143,12 @@ void	lst_create(void)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	if (!g_inf.start)
-		g_inf.start = g_inf.num;
-	else if (!g_inf.end)
-			g_inf.end = g_inf.num;
-	g_inf.start = 0;//right now don t use
-	g_inf.end = 0;
+	if (!g_inf.start10)
+		g_inf.start = new;
+	else if (!g_inf.end10)
+			g_inf.end = new;
+	g_inf.start10 = 1;//right now don t use
+	g_inf.end10 = 1;
 	if (!g_inf.room)
 		ft_strdel(&g_inf.room);
 	// printf("|%s| %d %d\n", g_inf.room, g_inf.coord_y, g_inf.coord_x);
