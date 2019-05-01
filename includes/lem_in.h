@@ -46,12 +46,23 @@ typedef struct		s_lst
 	short int			visited;// | start > 1 | end < 1 | visited == 1 |
 }					t_lst;
 
+typedef struct		s_queue
+{
+	// char				*room;
+	struct s_lst		*lst;
+	struct s_queue		*next;
+	struct s_queue		*prev;
+}					t_queue;
+
 t_info					g_inf;
 t_lst					*g_lst;
+t_queue					*g_que;
 
 int		valid_rooms(char *str);
 void	lst_create(void);
 int		valid_links(char *str);
 void	links_create(char *a, char *b);
+void	create_queue(t_lst *list);
+void	handle_queue(void);
 
 #endif

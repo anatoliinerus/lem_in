@@ -29,8 +29,11 @@ int	main(void)
 		else if (valid_rooms(tmp))
 			lst_create();
 		else if (valid_links(tmp))
-			printf("work\n");
+			NULL;
         ft_strdel(&tmp);
     }
-	return 0;
+			// printf("test\n");
+
+    handle_queue();
+	return (0);
 }

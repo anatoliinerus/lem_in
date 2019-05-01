@@ -36,9 +36,10 @@ int	valid_links(char *str)
 	     
 	      t_lst *tmp;
           t_neighbour *tmp2;
-
+          static int kek = -1;
           tmp = g_lst;
           // printf("|%d|\n", tmp->num);
+          printf("\n--------------------%d\n", ++kek);
           printf("|%s|\n", tmp->room);
           while (tmp)
           {
@@ -58,7 +59,8 @@ int	valid_links(char *str)
           	tmp = tmp->next;
           	printf("|%s|\n", tmp->room);
           }
-          printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
+          // printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
+          printf("\n--------------------\n");
 	return (1);
 }
 
