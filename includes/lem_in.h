@@ -16,7 +16,9 @@
 # include "../libft/libft.h"
 # include <string.h>
 # define ERROR {write(1, "ERROR\n", 6); return (0);}
-
+# define KEK printf("KEK\n");
+# define KEK2 printf("KEK2\n");
+# define KEK3 printf("KEK3\n");
 typedef struct			s_info
 {
 	int					num_ants;
