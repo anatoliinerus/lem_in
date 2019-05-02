@@ -27,6 +27,8 @@ int	valid_links(char *str)
 		if (!ft_isascii(str[i]))
 			return (0);
 	argv1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
+	if (!ft_strcmp(argv1, ft_strchr(str, '-') + 1))
+		return (0);
 	links_create(argv1, ft_strchr(str, '-') + 1);
 	links_create(ft_strchr(str, '-') + 1, argv1);
 	ft_strdel(&argv1);
@@ -34,33 +36,33 @@ int	valid_links(char *str)
 
 
 	     
-	      t_lst *tmp;
-          t_neighbour *tmp2;
-          static int kek = -1;
-          tmp = g_lst;
-          // printf("|%d|\n", tmp->num);
-          printf("\n--------------------%d\n", ++kek);
-          printf("|%s|\n", tmp->room);
-          while (tmp)
-          {
-              tmp2 = tmp->links;
-              if (tmp2)
-              {
-                 // printf("%d\n", tmp2->num);
-                 printf("%s\n", tmp2->room);
-          	while (tmp2->next != NULL)    /// for print my lists
-          	{
-          		tmp2 = tmp2->next;
-          		printf("%s\n", tmp2->room);
-          	}
-          	}
-          	if (!tmp->next)
-              	break ;
-          	tmp = tmp->next;
-          	printf("|%s|\n", tmp->room);
-          }
-          // printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
-          printf("\n--------------------\n");
+	//       t_lst *tmp;
+ //          t_neighbour *tmp2;
+ //          static int kek = -1;
+ //          tmp = g_lst;
+ //          // printf("|%d|\n", tmp->num);
+ //          printf("\n--------------------%d\n", ++kek);
+ //          printf("|%s|\n", tmp->room);
+ //          while (tmp)
+ //          {
+ //              tmp2 = tmp->links;
+ //              if (tmp2)
+ //              {
+ //                 // printf("%d\n", tmp2->num);
+ //                 printf("%s\n", tmp2->room);
+ //          	while (tmp2->next != NULL)    /// for print my lists
+ //          	{
+ //          		tmp2 = tmp2->next;
+ //          		printf("%s\n", tmp2->room);
+ //          	}
+ //          	}
+ //          	if (!tmp->next)
+ //              	break ;
+ //          	tmp = tmp->next;
+ //          	printf("|%s|\n", tmp->room);
+ //          }
+ //          // printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
+ //          printf("\n--------------------\n");
 	return (1);
 }
 
@@ -95,15 +97,15 @@ void	links_create(char *a, char *b)
 	t_lst		*lmp;
 
 	lmp = g_lst;
-	while (!ft_strequ(lmp->room, b))
+	while (lmp && !ft_strequ(lmp->room, b))
 		lmp = lmp->next;
-	if (!lmp->links)
+	if (lmp && !lmp->links)
 	{
 		lmp->links = ft_memalloc(sizeof(t_neighbour));
 		lmp->links->room = ft_strdup(a);
 		lmp->links->next = NULL;
 	}
-	else
+	else if (lmp)
 	{
 		tmp = lmp->links;
 		while (tmp->next != NULL)

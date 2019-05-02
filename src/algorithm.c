@@ -14,15 +14,34 @@
 
 void	handle_queue(void)
 {
-	// g_que = ft_memalloc(sizeof(t_queue));
 	t_queue		*que;
+	t_neighbour	*neib;
+	t_lst		*lst;
 
-	create_queue(NULL);
+	create_queue(g_inf.start);
 	que = g_que;
-
-	// printf("%s\n", que->lst->room);
-	que->lst = g_inf.start;
-	while (que->lst->links)
+	neib = que->lst->links;
+	while (que)
+	{
+		lst = que->lst;
+		while (lst)
+		{
+			neib = que->lst->links;
+			if (neib)
+			{
+				while (neib->next)
+				{
+					create_queue(find_lst(neib));
+					printf("%s\n", neib->room);
+					neib = neib->next;
+				}
+				// create_queue(find_lst(neib));
+				printf("%s\n", neib->room);
+			}
+			lst = lst->next;
+		}
+		que = que->next;
+	}
 }
 
 void	create_queue(t_lst *list)
@@ -49,3 +68,15 @@ void	create_queue(t_lst *list)
 		tmp->next = new;
 	}
 }
+
+t_lst	*find_lst(t_neighbour *neib)
+{
+	const char *room = neib->room;
+	t_lst *tmp;
+
+	tmp = g_lst;
+	while (tmp && ft_strcmp(tmp->room, room) != 0)
+		tmp = tmp->next;
+	return (tmp);
+}
+

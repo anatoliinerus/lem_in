@@ -64,5 +64,6 @@ int		valid_links(char *str);
 void	links_create(char *a, char *b);
 void	create_queue(t_lst *list);
 void	handle_queue(void);
+t_lst	*find_lst(t_neighbour *neib);
 
 #endif
