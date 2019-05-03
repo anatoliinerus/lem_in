@@ -16,18 +16,19 @@ void	handle_queue(void)
 {
 	t_queue		*que;
 	t_neighbour	*neib;
-
-	create_queue(g_inf.start);
+	short int	visited;
+	create_queue(g_inf.start, 0);
 	que = g_que;
 	neib = que->lst->links;
 	while (que != NULL)
 	{
 		neib = que->lst->links;
-		if (neib)
+		visited = que->lst->visited;
+		if (neib && !visited)
 		{
 			while (neib != NULL)
 			{
-				create_queue(find_lst(neib));
+				create_queue(find_lst(neib), 1);
 				printf("in:%s\n", neib->room);
 				neib = neib->next;
 			}
@@ -38,10 +39,15 @@ void	handle_queue(void)
 	}
 }
 
-void	create_queue(t_lst *list)
+void	create_queue(t_lst *list, int i)
 {
 	t_queue *tmp;
 	t_queue *new;
+
+	if (i == 1)
+		list->visited = 1;
+	else
+		list->visited = 0;
 
 	if (!g_que)
 	{
@@ -61,7 +67,6 @@ void	create_queue(t_lst *list)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	// list->visited
 }
 
 t_lst	*find_lst(t_neighbour *neib)

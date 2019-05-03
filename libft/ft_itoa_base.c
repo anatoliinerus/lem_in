@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		length_u(uintmax_t n, int base)
+static int		length_u(__uintmax_t n, int base)
 {
 	int				len;
 	unsigned long	tmp;
