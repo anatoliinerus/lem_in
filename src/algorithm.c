@@ -16,24 +16,27 @@ void	handle_queue(void)
 {
 	t_queue		*que;
 	t_neighbour	*neib;
-	short int	visited;
+	// short int	visited;
+
 	create_queue(g_inf.start, 0);
 	que = g_que;
 	neib = que->lst->links;
 	while (que != NULL)
-	{
+	{printf("%s\n", que->lst->room);
 		neib = que->lst->links;
-		visited = que->lst->visited;
-		if (neib && !visited)
+		// visited = que->lst->visited;
+		if (neib)
 		{
 			while (neib != NULL)
 			{
+				printf("|%d|\n", que->lst->visited);
+				if (find_lst(neib)->visited == 1)
+					neib = neib->next;
 				create_queue(find_lst(neib), 1);
 				printf("in:%s\n", neib->room);
 				neib = neib->next;
 			}
-			// create_queue(find_lst(neib));
-			// printf("out:%s\n", neib->room);
+			que->lst->visited = 1;
 		}
 		que = que->next;
 	}
