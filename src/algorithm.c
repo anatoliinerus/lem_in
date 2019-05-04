@@ -22,22 +22,32 @@ void	handle_queue(void)
 	que = g_que;
 	neib = que->lst->links;
 	while (que != NULL)
-	{printf("%s\n", que->lst->room);
+	{
+		// printf("%s\n", que->lst->room);
 		neib = que->lst->links;
-		// visited = que->lst->visited;
 		if (neib)
 		{
 			while (neib != NULL)
 			{
-				printf("|%d|\n", que->lst->visited);
+				// printf("|%d|\n", que->lst->visited);
 				if (find_lst(neib)->visited == 1)
 					neib = neib->next;
-				create_queue(find_lst(neib), 1);
-				printf("in:%s\n", neib->room);
-				neib = neib->next;
+				else
+				{
+                    create_queue(find_lst(neib), 1);
+                    // printf("in:%s\n", neib->room);
+                    find_lst(neib)->visited = 1;
+                    neib = neib->next;
+                }
 			}
 			que->lst->visited = 1;
 		}
+		que = que->next;
+	}
+	que = g_que;
+	while (que)
+	{
+		printf("%s\n", que->lst->room);
 		que = que->next;
 	}
 }

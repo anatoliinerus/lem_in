@@ -30,7 +30,10 @@ int	main(void)
 			lst_create();
 		else if (valid_links(tmp))
 			NULL;
+         // else if (tmp && !ft_strcmp(tmp, "break"))///LEAKS
+         //     break;
         ft_strdel(&tmp);
+
     }
 			// printf("test\n");
 
