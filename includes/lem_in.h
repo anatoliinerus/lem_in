@@ -17,8 +17,6 @@
 # include <string.h>
 # define ERROR {write(1, "ERROR\n", 6); return (0);}
 # define KEK printf("KEK\n");
-# define KEK2 printf("KEK2\n");
-# define KEK3 printf("KEK3\n");
 typedef struct			s_info
 {
 	int					num_ants;
@@ -56,9 +54,17 @@ typedef struct		s_queue
 	struct s_queue		*prev;
 }					t_queue;
 
+typedef struct		s_ways
+{
+	// char				*room;
+	struct s_queue		*que;
+	struct s_ways		*next;
+}					t_ways;
+
 t_info					g_inf;
 t_lst					*g_lst;
 t_queue					*g_que;
+t_ways					*g_ways;
 
 int		valid_rooms(char *str);
 void	lst_create(void);
