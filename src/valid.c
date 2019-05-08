@@ -36,33 +36,33 @@ int	valid_links(char *str)
 
 
 	     
-	      t_lst *tmp;
-          t_neighbour *tmp2;
-          static int kek = -1;
-          tmp = g_lst;
-          // printf("|%d|\n", tmp->num);
-          printf("\n--------------------%d\n", ++kek);
-          printf("|%s|\n", tmp->room);
-          while (tmp)
-          {
-              tmp2 = tmp->links;
-              if (tmp2)
-              {
-                 // printf("%d\n", tmp2->num);
-                 printf("%s\n", tmp2->room);
-          	while (tmp2->next != NULL)    /// for print my lists
-          	{
-          		tmp2 = tmp2->next;
-          		printf("%s\n", tmp2->room);
-          	}
-          	}
-          	if (!tmp->next)
-              	break ;
-          	tmp = tmp->next;
-          	printf("|%s|\n", tmp->room);
-          }
-          // printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
-          printf("\n--------------------\n");
+	      // t_lst *tmp;
+       //    t_neighbour *tmp2;
+       //    static int kek = -1;
+       //    tmp = g_lst;
+       //    // printf("|%d|\n", tmp->num);
+       //    printf("\n--------------------%d\n", ++kek);
+       //    printf("|%s|\n", tmp->room);
+       //    while (tmp)
+       //    {
+       //        tmp2 = tmp->links;
+       //        if (tmp2)
+       //        {
+       //           // printf("%d\n", tmp2->num);
+       //           printf("%s\n", tmp2->room);
+       //    	while (tmp2->next != NULL)    /// for print my lists
+       //    	{
+       //    		tmp2 = tmp2->next;
+       //    		printf("%s\n", tmp2->room);
+       //    	}
+       //    	}
+       //    	if (!tmp->next)
+       //        	break ;
+       //    	tmp = tmp->next;
+       //    	printf("|%s|\n", tmp->room);
+       //    }
+       //    // printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
+       //    printf("\n--------------------\n");
 	return (1);
 }
 

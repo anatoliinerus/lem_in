@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 # include <string.h>
 # define ERROR {write(1, "ERROR\n", 6); return (0);}
-# define KEK printf("KEK\n");
+
 typedef struct			s_info
 {
 	int					num_ants;
@@ -70,8 +70,10 @@ int		valid_rooms(char *str);
 void	lst_create(void);
 int		valid_links(char *str);
 void	links_create(char *a, char *b);
-void	create_queue(t_lst *list, int i);
+void	create_queue(t_lst *list, int i, t_queue *que);
 void	handle_queue(void);
 t_lst	*find_lst(t_neighbour *neib);
+void	create_ways(t_queue	*que);
+void	copy_que(t_ways *ways, t_queue	*que);
 
 #endif

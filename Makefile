@@ -40,7 +40,7 @@
 
 NAME = lem-in
 
-FLAGS = -Werror -Wextra -Wall -fsanitize=address -g
+FLAGS = -fsanitize=address -g
 
 
 all: $(NAME)

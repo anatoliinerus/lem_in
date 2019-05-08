@@ -17,7 +17,7 @@ void	handle_queue(void)
 	t_queue		*que;
 	t_neighbour	*neib;
 
-	create_queue(g_inf.start, 0);
+	create_queue(g_inf.start, 0, NULL);
 	que = g_que;
 	neib = que->lst->links;
 	while (que != NULL)
@@ -31,13 +31,13 @@ void	handle_queue(void)
 					neib = neib->next;
 				else
 				{
-                    create_queue(find_lst(neib), 1);
+                    create_queue(find_lst(neib), 1, que);
                     find_lst(neib)->visited = 1;
                     neib = neib->next;
                 }
 			}
-			if (que->lst == g_inf.start)
-				find_any_paths(que);
+			if (que->lst == g_inf.end)
+				create_ways(que);
 			que->lst->visited = 1;
 		}
 		que = que->next;////////////need to clear whole queue after finding first start !
@@ -54,7 +54,7 @@ void	handle_queue(void)
 	// }
 }
 
-void	find_any_paths(t_queue	*que)
+void	create_ways(t_queue	*que)
 {
 	t_ways	*tmp;
 	t_ways	*new;
@@ -74,39 +74,48 @@ void	find_any_paths(t_queue	*que)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+
 		// while (tmq->lst != g_inf.end)
 		// {
-		create_ways(new, que);
+		copy_que(new, que);
 		//		tmq = tmq->prev;
 		// }
 }
 
-void	create_ways(t_ways *ways, t_queue	*que) // que on start 
+void	copy_que(t_ways *ways, t_queue	*que) // que on start 
 {
 	t_queue *tmp;
 
-	tmp = ways->que;
-	if (!ways->que)
+	while (que->lst != g_inf.start)
 	{
-		ways->que = ft_memalloc(sizeof(t_queue));
-	}
-	else
-	{
-		tmp = ways->que;
-		new = ft_memalloc(sizeof(t_queue));
-		new->prev = NULL;
-		while (tmp-prev)
-			tmp = tmp-prev;
-		tmp->prev = new;
-		new->next = tmp;
-	}
-	while(tmp->prev != g_inf.end)
-	{
-		tmp = tmp->prev;
-	}
-}
+printf("%s\n", que->lst->room);
 
-void	create_queue(t_lst *list, int i)
+		if (!ways->que)
+		{
+			ways->que = ft_memalloc(sizeof(t_queue));
+			tmp = ways->que;
+		}
+		tmp->lst = que->lst;
+		tmp->next = ft_memalloc(sizeof(t_queue));
+		tmp->next->prev = tmp;
+		tmp = tmp->next;
+		que = que->prev;
+		// tmp = add_que(que);
+	}
+	// while(tmp->lst != g_inf.end)
+	// {
+		// tmp = tmp->prev;
+	// }
+}
+// t_queue	add_que(t_queue	*que)
+// {
+// 	t_queue	*new;
+
+// 	new = ft_memalloc(sizeof(t_queue));
+// 	new->lst = que->lst;
+// }
+
+void	create_queue(t_lst *list, int i, t_queue *que)
 {
 	t_queue *tmp;
 	t_queue *new;
@@ -133,7 +142,10 @@ void	create_queue(t_lst *list, int i)
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = new;
-		new->prev = tmp;///////changes
+		// new = g_que;
+		// while (tmp != que)
+			// tmp = tmp->next;
+		new->prev = que;///////changes
 	}
 }
 
