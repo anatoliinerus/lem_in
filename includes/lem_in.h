@@ -44,6 +44,7 @@ typedef struct		s_lst
 	struct s_lst		*next;
 	struct s_neighbour	*links;
 	short int			visited;// | start > 1 | end < 1 | visited == 1 |
+	short int			blocked;
 }					t_lst;
 
 typedef struct		s_queue
@@ -75,5 +76,6 @@ void	handle_queue(void);
 t_lst	*find_lst(t_neighbour *neib);
 void	create_ways(t_queue	*que);
 void	copy_que(t_ways *ways, t_queue	*que);
+t_queue *clear_que(t_queue *que);
 
 #endif

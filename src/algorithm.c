@@ -14,6 +14,7 @@
 
 void	handle_queue(void)
 {
+	int	i = 0;
 	t_queue		*que;
 	t_neighbour	*neib;
 
@@ -27,7 +28,8 @@ void	handle_queue(void)
 		{
 			while (neib != NULL)
 			{
-				if (find_lst(neib)->visited == 1)
+
+				if (find_lst(neib)->visited == 1 || find_lst(neib)->blocked == 1)
 					neib = neib->next;
 				else
 				{
@@ -37,10 +39,20 @@ void	handle_queue(void)
                 }
 			}
 			if (que->lst == g_inf.end)
+			{
 				create_ways(que);
-			que->lst->visited = 1;
+				que = clear_que(que);
+			}
+			else
+				que->lst->visited = 1;
 		}
-		que = que->next;////////////need to clear whole queue after finding first start !
+		if (que)
+			que = que->next;////////////need to clear whole queue after finding first start !
+		else
+		{
+			i = 1;
+			que = g_que;
+		}
 	}
 	// que = g_que;
 	// while (que)
@@ -52,6 +64,31 @@ void	handle_queue(void)
 	// 	printf("next = %s\n", que->next->lst->room);
 	// 	que = que->next;
 	// }
+}
+
+t_queue *clear_que(t_queue *que)
+{
+	t_queue *tmp;
+	t_lst	*lst;
+
+	while (g_que->next)
+	{
+		tmp = g_que;
+		g_que = g_que->next;
+		free(tmp);
+	}
+	lst = g_lst;
+	while (lst->next)
+	{
+		lst->visited = 0;
+		lst = lst->next;
+	}
+	lst->visited = 0;
+	g_que = ft_memalloc(sizeof(t_queue));
+	g_que->lst = g_inf.start;
+	g_que->next = NULL;
+	g_que->prev = NULL;
+	return (NULL);
 }
 
 void	create_ways(t_queue	*que)
@@ -74,11 +111,12 @@ void	create_ways(t_queue	*que)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-
-		// while (tmq->lst != g_inf.end)
-		// {
 		copy_que(new, que);
-		//		tmq = tmq->prev;
+
+		// while (g_ways->next)
+		// {
+		// 	printf("%s\n", g_ways->que->lst->room);
+		// 	g_ways = g_ways->next;
 		// }
 }
 
@@ -89,6 +127,9 @@ void	copy_que(t_ways *ways, t_queue	*que) // que on start
 	while (que->lst != g_inf.start)
 	{
 printf("%s\n", que->lst->room);
+// printf("%d\n", que->lst->visited);
+// printf("%d\n", que->lst->blocked);
+// printf("--------------------------\n\n");
 
 		if (!ways->que)
 		{
@@ -100,8 +141,20 @@ printf("%s\n", que->lst->room);
 		tmp->next->prev = tmp;
 		tmp = tmp->next;
 		que = que->prev;
+		if (que->lst != g_inf.end && que->lst != g_inf.start)
+			que->lst->blocked = 1;
 		// tmp = add_que(que);
 	}
+printf("%s\n", que->lst->room);
+// printf("%d\n", que->lst->visited);
+// printf("%d\n", que->lst->blocked);
+// printf("--------------------------\n");
+
+		tmp->lst = que->lst;
+		tmp->next = ft_memalloc(sizeof(t_queue));
+		tmp->next->prev = tmp;
+		tmp = tmp->next;
+		que = que->prev;
 	// while(tmp->lst != g_inf.end)
 	// {
 		// tmp = tmp->prev;

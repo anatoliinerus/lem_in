@@ -38,5 +38,6 @@ int	main(void)
 			// printf("test\n");
 
     handle_queue();
+    // system("leaks lem-in");
 	return (0);
 }
