@@ -71,7 +71,7 @@ t_queue *clear_que(t_queue *que)
 	t_queue *tmp;
 	t_lst	*lst;
 
-	while (g_que->next)
+	while (g_que)
 	{
 		tmp = g_que;
 		g_que = g_que->next;

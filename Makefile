@@ -40,7 +40,7 @@
 
 NAME = lem-in
 
-FLAGS = -fsanitize=address -g
+FLAGS = -g
 
 
 all: $(NAME)
