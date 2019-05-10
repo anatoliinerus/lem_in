@@ -21,6 +21,7 @@ typedef struct			s_info
 {
 	int					num_ants;
 	int					finished;
+	int					ant_name;
 	char				*room;
 	int					num;
 	int					coord_x;
@@ -86,5 +87,6 @@ void	ft_step_forward(t_ways *way);
 void	ft_first_ant(t_ways	*way);
 int  choose_ways(int i);
 t_ways	*find_way(int	i);
+void	print_ant(t_queue *que);
 
 #endif
