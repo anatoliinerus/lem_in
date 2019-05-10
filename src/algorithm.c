@@ -100,6 +100,7 @@ void	create_ways(t_queue	*que)
 	if (!g_ways)
 	{
 		g_ways = ft_memalloc(sizeof(t_ways));
+		g_ways->index = 0;
 		new = g_ways;
 	}
 	else
@@ -109,6 +110,7 @@ void	create_ways(t_queue	*que)
 		new->next = NULL;
 		while (tmp->next)
 			tmp = tmp->next;
+		new->index = tmp->index + 1;
 		tmp->next = new;
 	}
 		copy_que(new, que);
@@ -124,9 +126,10 @@ void	copy_que(t_ways *ways, t_queue	*que) // que on start
 {
 	t_queue *tmp;
 
+	ways->len = 0;
 	while (que->lst != g_inf.start)
 	{
-printf("%s\n", que->lst->room);
+// printf("%s\n", que->lst->room);
 // printf("%d\n", que->lst->visited);
 // printf("%d\n", que->lst->blocked);
 // printf("--------------------------\n\n");
@@ -143,9 +146,10 @@ printf("%s\n", que->lst->room);
 		que = que->prev;
 		if (que->lst != g_inf.end && que->lst != g_inf.start)
 			que->lst->blocked = 1;
+		ways->len++;
 		// tmp = add_que(que);
 	}
-printf("%s\n", que->lst->room);
+// printf("%s\n", que->lst->room);
 // printf("%d\n", que->lst->visited);
 // printf("%d\n", que->lst->blocked);
 // printf("--------------------------\n");
@@ -155,6 +159,9 @@ printf("%s\n", que->lst->room);
 		tmp->next->prev = tmp;
 		tmp = tmp->next;
 		que = que->prev;
+		ways->len++;
+// printf("%d\n", ways->len);
+
 	// while(tmp->lst != g_inf.end)
 	// {
 		// tmp = tmp->prev;

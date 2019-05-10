@@ -20,6 +20,7 @@
 typedef struct			s_info
 {
 	int					num_ants;
+	int					finished;
 	char				*room;
 	int					num;
 	int					coord_x;
@@ -40,6 +41,7 @@ typedef struct		s_neighbour
 typedef struct		s_lst
 {
 	int					num;
+	int					ant;
 	char				*room;
 	struct s_lst		*next;
 	struct s_neighbour	*links;
@@ -60,6 +62,8 @@ typedef struct		s_ways
 	// char				*room;
 	struct s_queue		*que;
 	struct s_ways		*next;
+	int					len;
+	int					index;
 }					t_ways;
 
 t_info					g_inf;
@@ -77,5 +81,10 @@ t_lst	*find_lst(t_neighbour *neib);
 void	create_ways(t_queue	*que);
 void	copy_que(t_ways *ways, t_queue	*que);
 t_queue *clear_que(t_queue *que);
+void	ft_move(void);
+void	ft_step_forward(t_ways *way);
+void	ft_first_ant(t_ways	*way);
+int  choose_ways(int i);
+t_ways	*find_way(int	i);
 
 #endif
