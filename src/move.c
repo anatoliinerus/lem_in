@@ -18,11 +18,11 @@ void	ft_move(void)
 	int		num;
 
 	num = g_inf.num_ants;
-	g_inf.ant_name = num;
+	g_inf.ant_name = 0;
 	// t_ways	*tmp;
 
 	// tmp = g_ways;
-	while (1)
+	while (g_inf.finished < num)
 	{
 		if (g_inf.num_ants > 0)
 		{
@@ -31,8 +31,8 @@ void	ft_move(void)
 				if (g_inf.num_ants > choose_ways(i))
 				{
 					ft_first_ant(find_way(i));
-					if (g_inf.num_ants != num)
-						ft_step_forward(find_way(i));
+					// if (g_inf.num_ants != num)
+					// 	ft_step_forward(find_way(i));
 					g_inf.num_ants--;
 					write(1, "\n", 1);
 				}
@@ -44,9 +44,6 @@ void	ft_move(void)
 			ft_step_forward(find_way(i));
 			write(1, "\n", 1);
 		}
-
-		if (g_inf.finished == num)
-			break ;
 	}
 }
 
@@ -62,16 +59,17 @@ void	ft_step_forward(t_ways *way)
 
 			// printf("%s %d\n", tmp->lst->room, tmp->lst->ant);
 
-		if (tmp->next->lst->ant == 1)
+		if (tmp->next->lst->ant != 0)
 		{
 			if (tmp->lst == g_inf.end)
+			{
 				g_inf.finished++;
+			}
 			else
 			{
-				tmp->lst->ant = 1;
-				printf("----------");
+				// if (tmp->next->lst != g_inf.start)
+				tmp->lst->ant = tmp->next->lst->ant;
 				print_ant(tmp);
-				printf("----------");
 
 			}
 			tmp->next->lst->ant = 0;
@@ -89,8 +87,8 @@ void	ft_first_ant(t_ways	*way)
 	tmp = way->que;
 	while (tmp->next->lst != g_inf.start)
 		tmp = tmp->next;
+	tmp->lst->ant = ++g_inf.ant_name ;
 	print_ant(tmp);
-	tmp->lst->ant = 1;
 }
 
 int  choose_ways(int i)
@@ -118,7 +116,7 @@ t_ways	*find_way(int	i)
 void	print_ant(t_queue *que)
 {
 	write(1, "L", 1);
-	ft_putnbr(g_inf.ant_name - g_inf.num_ants);
+	ft_putnbr(que->lst->ant);
 	write(1, "-", 1);
 	ft_putstr(que->lst->room);
 	write(1, " ", 1);
