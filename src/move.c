@@ -34,16 +34,18 @@ void	ft_move(void)
 					// if (g_inf.num_ants != num)
 					// 	ft_step_forward(find_way(i));
 					g_inf.num_ants--;
-					write(1, "\n", 1);
 				}
 					// printf("%d\n", g_inf.finished);
 		}
 		i = -1;
+					write(1, "\n", 1);
+
 		while (find_way(++i))
 		{
 			ft_step_forward(find_way(i));
-			write(1, "\n", 1);
 		}
+			// write(1, "\n", 1);
+		
 	}
 }
 
