@@ -45,7 +45,7 @@ void	ft_move(void)
 			ft_step_forward(find_way(i));
 		}
 			// write(1, "\n", 1);
-		
+
 	}
 }
 
@@ -66,12 +66,13 @@ void	ft_step_forward(t_ways *way)
 			if (tmp->lst == g_inf.end)
 			{
 				g_inf.finished++;
+				print_ant(tmp->lst->room, tmp->next->lst->ant);
 			}
 			else
 			{
 				// if (tmp->next->lst != g_inf.start)
 				tmp->lst->ant = tmp->next->lst->ant;
-				print_ant(tmp);
+				print_ant(tmp->lst->room, tmp->lst->ant);
 
 			}
 			tmp->next->lst->ant = 0;
@@ -90,7 +91,7 @@ void	ft_first_ant(t_ways	*way)
 	while (tmp->next->lst != g_inf.start)
 		tmp = tmp->next;
 	tmp->lst->ant = ++g_inf.ant_name ;
-	print_ant(tmp);
+	print_ant(tmp->lst->room, tmp->lst->ant);
 }
 
 int  choose_ways(int i)
@@ -115,12 +116,12 @@ t_ways	*find_way(int	i)
 	return (tmp);
 }
 
-void	print_ant(t_queue *que)
+void	print_ant(char *str, int ant)
 {
 	write(1, "L", 1);
-	ft_putnbr(que->lst->ant);
+	ft_putnbr(ant);
 	write(1, "-", 1);
-	ft_putstr(que->lst->room);
+	ft_putstr(str);
 	write(1, " ", 1);
 
 
