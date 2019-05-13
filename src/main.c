@@ -30,17 +30,12 @@ int	main(void)
 			lst_create();
 		else if (valid_links(tmp))
 			NULL;
-         // else if (tmp && !ft_strcmp(tmp, "break"))///LEAKS
-         //     break;
         ft_strdel(&tmp);
 
     }
-			// printf("test\n");
-
     handle_queue();
     ft_move();
     write(1, "\nsteps: ", 8);
     ft_putnbr(g_inf.steps);
-    // system("leaks lem-in");
 	return (0);
 }

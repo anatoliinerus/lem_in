@@ -32,37 +32,6 @@ int	valid_links(char *str)
 	links_create(argv1, ft_strchr(str, '-') + 1);
 	links_create(ft_strchr(str, '-') + 1, argv1);
 	ft_strdel(&argv1);
-
-
-
-	     
-	      // t_lst *tmp;
-       //    t_neighbour *tmp2;
-       //    static int kek = -1;
-       //    tmp = g_lst;
-       //    // printf("|%d|\n", tmp->num);
-       //    printf("\n--------------------%d\n", ++kek);
-       //    printf("|%s|\n", tmp->room);
-       //    while (tmp)
-       //    {
-       //        tmp2 = tmp->links;
-       //        if (tmp2)
-       //        {
-       //           // printf("%d\n", tmp2->num);
-       //           printf("%s\n", tmp2->room);
-       //    	while (tmp2->next != NULL)    /// for print my lists
-       //    	{
-       //    		tmp2 = tmp2->next;
-       //    		printf("%s\n", tmp2->room);
-       //    	}
-       //    	}
-       //    	if (!tmp->next)
-       //        	break ;
-       //    	tmp = tmp->next;
-       //    	printf("|%s|\n", tmp->room);
-       //    }
-       //    // printf("start: %s end: %s\n",  g_inf.start->room, g_inf.end->room);
-       //    printf("\n--------------------\n");
 	return (1);
 }
 
@@ -155,15 +124,4 @@ void	lst_create(void)
 	g_inf.end10 = 1;
 	if (!g_inf.room)
 		ft_strdel(&g_inf.room);
-	// printf("|%s| %d %d\n", g_inf.room, g_inf.coord_y, g_inf.coord_x);
-	
-	// t_lst *test;
-
-	// test = g_lst;
-	// printf("%s\n", test->room);
-	// while (test->next != NULL)
-	// {
-	// 	test = test->next;
-	// 	printf("%s\n", test->room);
-	// }
 }
