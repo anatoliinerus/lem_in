@@ -19,6 +19,7 @@ void	ft_move(void)
 
 	num = g_inf.num_ants;
 	g_inf.ant_name = 0;
+	g_inf.steps = 0;
 	// t_ways	*tmp;
 
 	// tmp = g_ways;
@@ -76,6 +77,7 @@ void	ft_step_forward(t_ways *way)
 
 			}
 			tmp->next->lst->ant = 0;
+			g_inf.steps++;
 		}
 		tmp = tmp->next;
 	}
@@ -92,6 +94,7 @@ void	ft_first_ant(t_ways	*way)
 		tmp = tmp->next;
 	tmp->lst->ant = ++g_inf.ant_name ;
 	print_ant(tmp->lst->room, tmp->lst->ant);
+	g_inf.steps++;
 }
 
 int  choose_ways(int i)

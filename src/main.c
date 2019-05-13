@@ -39,6 +39,8 @@ int	main(void)
 
     handle_queue();
     ft_move();
+    write(1, "\nsteps: ", 8);
+    ft_putnbr(g_inf.steps);
     // system("leaks lem-in");
 	return (0);
 }

@@ -30,6 +30,7 @@ typedef struct			s_info
 	struct s_lst		*end;
 	short int			start10;
 	short int			end10;
+	long unsigned int	steps;
 }						t_info;
 
 typedef struct		s_neighbour
