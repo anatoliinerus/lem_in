@@ -32,64 +32,63 @@ typedef struct			s_info
 	long unsigned int	steps;
 }						t_info;
 
-typedef struct		s_neighbour
+typedef struct			s_neighbour
 {
 	int					num;
 	char				*room;
 	struct s_neighbour	*next;
-}					t_neighbour;
+}						t_neighbour;
 
-typedef struct		s_lst
+typedef struct			s_lst
 {
 	int					num;
 	int					ant;
 	char				*room;
 	struct s_lst		*next;
 	struct s_neighbour	*links;
-	short int			visited;// | start > 1 | end < 1 | visited == 1 |
+	short int			visited;
 	short int			blocked;
-}					t_lst;
+}						t_lst;
 
-typedef struct		s_queue
+typedef struct			s_queue
 {
-	// char				*room;
 	struct s_lst		*lst;
 	struct s_queue		*next;
 	struct s_queue		*prev;
-}					t_queue;
+}						t_queue;
 
-typedef struct		s_ways
+typedef struct			s_ways
 {
-	// char				*room;
 	struct s_queue		*que;
 	struct s_ways		*next;
 	int					len;
 	int					index;
-}					t_ways;
+}						t_ways;
 
 t_info					g_inf;
 t_lst					*g_lst;
 t_queue					*g_que;
 t_ways					*g_ways;
 
-int		valid_rooms(char *str);
-void	lst_create(void);
-int		valid_links(char *str);
-void	links_create(char *a, char *b, t_neighbour *tmp, t_lst *lmp);
-void	create_queue(t_lst *list, int i, t_queue *que);
-void	handle_queue(int i);
-t_lst	*find_lst(t_neighbour *neib);
-void	create_ways(t_queue	*que);
-void	copy_que(t_ways *ways, t_queue	*que);
-t_queue *clear_que();
-void	ft_move(void);
-void	ft_step_forward(t_ways *way);
-void	ft_first_ant(t_ways	*way);
-int  choose_ways(int i);
-t_ways	*find_way(int	i);
-void	print_ant(char *str, int ant);
-void	ft_lstcreate2(t_lst *new);
-t_queue	*handle_queue2(t_neighbour *neib, t_queue *que);
-void	main2(void);
+int						valid_rooms(char *str);
+void					lst_create(void);
+int						valid_links(char *str);
+void					links_create(char *a, char *b,
+						t_neighbour *tmp, t_lst *lmp);
+void					create_queue(t_lst *list, int i, t_queue *que);
+void					handle_queue(int i);
+t_lst					*find_lst(t_neighbour *neib);
+void					create_ways(t_queue *que);
+void					copy_que(t_ways *ways, t_queue *que);
+t_queue					*clear_que();
+void					ft_move(void);
+void					ft_step_forward(t_ways *way);
+void					ft_first_ant(t_ways *way);
+int						choose_ways(int i);
+t_ways					*find_way(int i);
+void					print_ant(char *str, int ant);
+void					ft_lstcreate2(t_lst *new);
+t_queue					*handle_queue2(t_neighbour *neib, t_queue *que);
+void					main2(void);
 
 #endif
