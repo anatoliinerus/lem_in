@@ -12,9 +12,8 @@
 
 #include "../includes/lem_in.h"
 
-void	handle_queue(void)
+void	handle_queue(int i)
 {
-	int	i = 0;
 	t_queue		*que;
 	t_neighbour	*neib;
 
@@ -26,25 +25,7 @@ void	handle_queue(void)
 		neib = que->lst->links;
 		if (neib)
 		{
-			while (neib != NULL)
-			{
-
-				if (find_lst(neib)->visited == 1 || find_lst(neib)->blocked == 1)
-					neib = neib->next;
-				else
-				{
-                    create_queue(find_lst(neib), 1, que);
-                    find_lst(neib)->visited = 1;
-                    neib = neib->next;
-                }
-			}
-			if (que->lst == g_inf.end)
-			{
-				create_ways(que);
-				que = clear_que(que);
-			}
-			else
-				que->lst->visited = 1;
+			que = handle_queue2(neib, que);
 		}
 		if (que)
 			que = que->next;
@@ -56,9 +37,33 @@ void	handle_queue(void)
 	}
 }
 
-t_queue *clear_que(t_queue *que)
+t_queue	*handle_queue2(t_neighbour *neib, t_queue *que)
 {
-	t_queue *tmp;
+	while (neib != NULL)
+	{
+		if (find_lst(neib)->visited == 1 ||
+			find_lst(neib)->blocked == 1)
+			neib = neib->next;
+		else
+		{
+			create_queue(find_lst(neib), 1, que);
+			find_lst(neib)->visited = 1;
+			neib = neib->next;
+		}
+	}
+	if (que->lst == g_inf.end)
+	{
+		create_ways(que);
+		que = clear_que();
+	}
+	else
+		que->lst->visited = 1;
+	return (que);
+}
+
+t_queue	*clear_que(void)
+{
+	t_queue	*tmp;
 	t_lst	*lst;
 
 	while (g_que)
@@ -81,7 +86,7 @@ t_queue *clear_que(t_queue *que)
 	return (NULL);
 }
 
-void	create_ways(t_queue	*que)
+void	create_ways(t_queue *que)
 {
 	t_ways	*tmp;
 	t_ways	*new;
@@ -102,12 +107,12 @@ void	create_ways(t_queue	*que)
 		new->index = tmp->index + 1;
 		tmp->next = new;
 	}
-		copy_que(new, que);
+	copy_que(new, que);
 }
 
-void	copy_que(t_ways *ways, t_queue	*que)
+void	copy_que(t_ways *ways, t_queue *que)
 {
-	t_queue *tmp;
+	t_queue	*tmp;
 
 	ways->len = 0;
 	while (que->lst != g_inf.start)
@@ -126,52 +131,10 @@ void	copy_que(t_ways *ways, t_queue	*que)
 			que->lst->blocked = 1;
 		ways->len++;
 	}
-		tmp->lst = que->lst;
-		tmp->next = ft_memalloc(sizeof(t_queue));
-		tmp->next->prev = tmp;
-		tmp = tmp->next;
-		que = que->prev;
-		ways->len++;
+	tmp->lst = que->lst;
+	tmp->next = ft_memalloc(sizeof(t_queue));
+	tmp->next->prev = tmp;
+	tmp = tmp->next;
+	que = que->prev;
+	ways->len++;
 }
-
-void	create_queue(t_lst *list, int i, t_queue *que)
-{
-	t_queue *tmp;
-	t_queue *new;
-
-	if (i == 1)
-		list->visited = 1;
-	else
-		list->visited = 0;
-
-	if (!g_que)
-	{
-		g_que = ft_memalloc(sizeof(t_queue));
-		g_que->lst = list;
-		g_que->next = NULL;
-		g_que->prev = NULL;
-	}
-	else
-	{
-		new = ft_memalloc(sizeof(t_queue));
-		new->lst = list;
-		new->next = NULL;
-		tmp = g_que;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->prev = que;
-	}
-}
-
-t_lst	*find_lst(t_neighbour *neib)
-{
-	const char *room = neib->room;
-	t_lst *tmp;
-
-	tmp = g_lst;
-	while (tmp && ft_strcmp(tmp->room, room) != 0)
-		tmp = tmp->next;
-	return (tmp);
-}
-

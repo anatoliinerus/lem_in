@@ -12,10 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-int	valid_links(char *str)
+int		valid_links(char *str)
 {
-	int i;
-	char *argv1;
+	int		i;
+	char	*argv1;
 
 	i = -1;
 	if (ft_word_count(str, '-') != 2)
@@ -29,13 +29,13 @@ int	valid_links(char *str)
 	argv1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
 	if (!ft_strcmp(argv1, ft_strchr(str, '-') + 1))
 		return (0);
-	links_create(argv1, ft_strchr(str, '-') + 1);
-	links_create(ft_strchr(str, '-') + 1, argv1);
+	links_create(argv1, ft_strchr(str, '-') + 1, NULL, NULL);
+	links_create(ft_strchr(str, '-') + 1, argv1, NULL, NULL);
 	ft_strdel(&argv1);
 	return (1);
 }
 
-int	valid_rooms(char *str)
+int		valid_rooms(char *str)
 {
 	int i;
 
@@ -60,11 +60,8 @@ int	valid_rooms(char *str)
 	return (1);
 }
 
-void	links_create(char *a, char *b)
+void	links_create(char *a, char *b, t_neighbour *tmp, t_lst *lmp)
 {
-	t_neighbour	*tmp;
-	t_lst		*lmp;
-
 	lmp = g_lst;
 	while (lmp && !ft_strequ(lmp->room, b))
 		lmp = lmp->next;
@@ -116,11 +113,16 @@ void	lst_create(void)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	ft_lstcreate2(new);
+}
+
+void	ft_lstcreate2(t_lst *new)
+{
 	if (!g_inf.start10)
 		g_inf.start = new;
 	else if (!g_inf.end10)
-			g_inf.end = new;
-	g_inf.start10 = 1;//right now don t use
+		g_inf.end = new;
+	g_inf.start10 = 1;
 	g_inf.end10 = 1;
 	if (!g_inf.room)
 		ft_strdel(&g_inf.room);

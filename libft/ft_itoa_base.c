@@ -6,13 +6,13 @@
 /*   By: anerus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 22:21:47 by anerus            #+#    #+#             */
-/*   Updated: 2019/02/06 22:21:49 by anerus           ###   ########.fr       */
+/*   Updated: 2019/05/14 14:23:12 by anerus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		length_u(__uintmax_t n, int base)
+static int		length_u(uintmax_t n, int base)
 {
 	int				len;
 	unsigned long	tmp;

@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include <string.h>
-# define ERROR {write(1, "ERROR\n", 6); return (0);}
 
 typedef struct			s_info
 {
@@ -76,18 +75,21 @@ t_ways					*g_ways;
 int		valid_rooms(char *str);
 void	lst_create(void);
 int		valid_links(char *str);
-void	links_create(char *a, char *b);
+void	links_create(char *a, char *b, t_neighbour *tmp, t_lst *lmp);
 void	create_queue(t_lst *list, int i, t_queue *que);
-void	handle_queue(void);
+void	handle_queue(int i);
 t_lst	*find_lst(t_neighbour *neib);
 void	create_ways(t_queue	*que);
 void	copy_que(t_ways *ways, t_queue	*que);
-t_queue *clear_que(t_queue *que);
+t_queue *clear_que();
 void	ft_move(void);
 void	ft_step_forward(t_ways *way);
 void	ft_first_ant(t_ways	*way);
 int  choose_ways(int i);
 t_ways	*find_way(int	i);
 void	print_ant(char *str, int ant);
+void	ft_lstcreate2(t_lst *new);
+t_queue	*handle_queue2(t_neighbour *neib, t_queue *que);
+void	main2(void);
 
 #endif
