@@ -19,7 +19,7 @@ void	ft_move(void)
 
 	num = g_inf.num_ants;
 	g_inf.ant_name = 0;
-	g_inf.steps = 0;
+	g_inf.steps = 1;
 	while (g_inf.finished < num)
 	{
 		if (g_inf.num_ants > 0)
