@@ -20,10 +20,10 @@ int		main(void)
 	g_inf.end10 = 1;
 	while (get_next_line(0, &tmp) > 0)
 	{
-		if (!g_inf.num_ants && (g_inf.num_ants = ft_atoi(tmp)) < 1)
+		if (!g_inf.num_ants)
 		{
-			write(1, "ERROR\n", 6);
-			return (0);
+			if (!check_ant(tmp))
+				return (0);
 		}
 		else if (!ft_strcmp(tmp, "##end") && !g_inf.end)
 			g_inf.end10 = 0;

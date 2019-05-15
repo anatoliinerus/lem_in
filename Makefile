@@ -14,7 +14,7 @@ NAME = lem-in
 
 FLAGS = -Wall -Werror -Wextra -g
 
-SRC = src/main.c src/valid.c src/algorithm.c src/move.c
+SRC = src/main.c src/valid.c src/algorithm.c src/move.c src/else.c
 
 OBJ = $(SRC:%.c=%.o) 
 
