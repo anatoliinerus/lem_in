@@ -17,6 +17,8 @@ int		valid_links(char *str)
 	int		i;
 	char	*argv1;
 
+	if (count(str))
+		return (0);
 	i = -1;
 	if (ft_word_count(str, '-') != 2)
 		return (0);

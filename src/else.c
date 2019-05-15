@@ -31,3 +31,19 @@ int	check_ant(char *tmp)
 	}
 	return(1);
 }
+
+int	count(char * str)
+{
+	int					i;
+	unsigned short int	count;
+
+	i = -1;
+	count = 0;
+	while (str[++i])
+		if (str[i] == '-')
+			count++;
+	if (count != 1)
+		return (1);
+	else
+		return (0);
+}

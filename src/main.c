@@ -20,7 +20,9 @@ int		main(void)
 	g_inf.end10 = 1;
 	while (get_next_line(0, &tmp) > 0)
 	{
-		if (!g_inf.num_ants && !g_inf.protect)
+		if (tmp[0] == '#' && tmp[1] != '#')
+			NULL;
+		else if (!g_inf.num_ants && !g_inf.protect)
 		{
 			if (!check_ant(tmp))
 				return (0);
