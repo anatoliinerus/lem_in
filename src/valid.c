@@ -121,7 +121,10 @@ void	lst_create(void)
 void	ft_lstcreate2(t_lst *new)
 {
 	if (!g_inf.start10)
+	{
+		g_inf.prot_start = 1;
 		g_inf.start = new;
+	}
 	else if (!g_inf.end10)
 		g_inf.end = new;
 	g_inf.start10 = 1;

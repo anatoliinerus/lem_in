@@ -46,6 +46,11 @@ int		main(void)
 		write(1, "\n", 1);
 		ft_strdel(&tmp);
 	}
+	if (!g_inf.prot_start)
+	{
+		write(1, "ERROR\n", 6);
+		return (0);
+	}
 	if (!g_inf.main2)
 		main2();
 	return (0);

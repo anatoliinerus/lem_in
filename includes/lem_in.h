@@ -18,6 +18,7 @@
 
 typedef struct			s_info
 {
+	short int			prot_start;
 	short int			main2;
 	short int			protect;
 	short int			hui;
