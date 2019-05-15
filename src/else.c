@@ -17,6 +17,7 @@ int	check_ant(char *tmp)
 	int	i;
 
 	i = -1;
+	g_inf.protect = 1;
 	while (tmp[++i])
 		if (ft_isdigit(tmp[i]) != 1)
 		{

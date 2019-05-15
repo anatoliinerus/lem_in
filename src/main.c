@@ -20,7 +20,7 @@ int		main(void)
 	g_inf.end10 = 1;
 	while (get_next_line(0, &tmp) > 0)
 	{
-		if (!g_inf.num_ants)
+		if (!g_inf.num_ants && !g_inf.protect)
 		{
 			if (!check_ant(tmp))
 				return (0);
@@ -33,20 +33,35 @@ int		main(void)
 			lst_create();
 		else if (valid_links(tmp))
 			NULL;
+		else if (tmp && g_inf.start && g_inf.end)
+			main2();
+		else
+		{
+			write(1, "ERROR\n", 6);
+			return (0);
+		}
 		ft_putstr(tmp);
 		write(1, "\n", 1);
 		ft_strdel(&tmp);
 	}
-	main2();
+	if (!g_inf.main2)
+		main2();
 	return (0);
 }
 
 void	main2(void)
 {
+	g_inf.main2 = 1;
 	handle_queue(0);
+	if (g_inf.hui != 1)
+	{
+		write(1, "ERROR\n", 6);
+		exit(1);
+	}
 	ft_move();
 	write(1, "\nsteps: ", 8);
 	ft_putnbr(g_inf.steps);
+	exit(1);
 }
 
 void	print_ant(char *str, int ant)
@@ -96,4 +111,6 @@ void	create_queue(t_lst *list, int i, t_queue *que)
 		tmp->next = new;
 		new->prev = que;
 	}
+	if (list == g_inf.end)
+		g_inf.hui = 1;
 }
