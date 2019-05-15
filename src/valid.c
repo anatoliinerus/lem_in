@@ -56,6 +56,8 @@ int		valid_rooms(char *str)
 	if (!g_inf.room)
 		g_inf.room = ft_strnew(30);
 	ft_strclr(g_inf.room);
+	if (check_room(strncpy(g_inf.room, str, strchr(str, ' ') - str)))
+		return (0);
 	g_inf.room = strncpy(g_inf.room, str, strchr(str, ' ') - str);
 	g_inf.coord_y = ft_atoi(ft_strchr(str, ' '));
 	g_inf.coord_x = ft_atoi(ft_strrchr(str, ' '));

@@ -18,7 +18,7 @@ int		main(void)
 
 	g_inf.start10 = 1;
 	g_inf.end10 = 1;
-	while (get_next_line(0, &tmp) > 0)
+	while (get_next_line(0, &tmp) > 0 && !g_inf.stop)
 	{
 		if (tmp[0] == '#' && tmp[1] != '#')
 			NULL;
@@ -31,9 +31,9 @@ int		main(void)
 			g_inf.end10 = 0;
 		else if (!ft_strcmp(tmp, "##start") && !g_inf.start)
 			g_inf.start10 = 0;
-		else if (valid_rooms(tmp))
+		else if (valid_rooms(tmp) && !g_inf.stop)
 			lst_create();
-		else if (valid_links(tmp))
+		else if (valid_links(tmp) && !g_inf.stop)
 			NULL;
 		else if (tmp && g_inf.start && g_inf.end)
 			main2();

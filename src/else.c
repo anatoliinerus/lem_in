@@ -47,3 +47,19 @@ int	count(char * str)
 	else
 		return (0);
 }
+
+int	check_room(char *str)
+{
+	int		i;
+	t_lst	*tmp;
+
+	i = -1;
+	tmp = g_lst;
+	while (tmp)
+	{
+		if (!ft_strcmp(str, tmp->room))
+			g_inf.stop = 1;
+		tmp = tmp->next;
+	}
+	return (0);
+}

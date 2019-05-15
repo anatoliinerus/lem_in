@@ -18,6 +18,7 @@
 
 typedef struct			s_info
 {
+	short int			stop;
 	short int			prot_start;
 	short int			main2;
 	short int			protect;
@@ -96,6 +97,8 @@ t_queue					*handle_queue2(t_neighbour *neib, t_queue *que);
 void					main2(void);
 int						check_ant(char *str);
 int						count(char * str);
+int						check_room(char *str);
+
 
 
 #endif
