@@ -98,7 +98,7 @@ void					main2(void);
 int						check_ant(char *str);
 int						count(char * str);
 int						check_room(char *str);
-
+int						check_same(char *str1, char *str2);
 
 
 #endif

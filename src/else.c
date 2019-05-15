@@ -63,3 +63,25 @@ int	check_room(char *str)
 	}
 	return (0);
 }
+
+int	check_same(char *str1, char *str2)
+{
+	t_lst	*tmp;
+	int		a;
+	int		b;
+
+	a = 0;
+	b = 0;
+	tmp = g_lst;
+	while (tmp)
+	{
+		if (!ft_strcmp(str1, tmp->room))
+			a++;
+		else if (!ft_strcmp(str2, tmp->room))
+			b++;
+		tmp = tmp->next;
+	}
+	if (a && b)
+		return (1);
+	return (0);
+}

@@ -30,7 +30,12 @@ int		valid_links(char *str)
 			return (0);
 	argv1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
 	if (!ft_strcmp(argv1, ft_strchr(str, '-') + 1))
+	{
+		ft_strdel(&argv1);
 		return (0);
+	}
+	if (!check_same(argv1, ft_strchr(str, '-') + 1))
+		g_inf.stop = 1;
 	links_create(argv1, ft_strchr(str, '-') + 1, NULL, NULL);
 	links_create(ft_strchr(str, '-') + 1, argv1, NULL, NULL);
 	ft_strdel(&argv1);
