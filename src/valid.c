@@ -12,9 +12,8 @@
 
 #include "../includes/lem_in.h"
 
-int		valid_links(char *str)
+int		valid_links(char *str, int i)
 {
-	int		i;
 	char	*argv1;
 
 	if (count(str))

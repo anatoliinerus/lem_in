@@ -34,7 +34,7 @@ int		main(void)
 			g_inf.start10 = 0;
 		else if (valid_rooms(tmp) && !g_inf.stop)
 			lst_create();
-		else if (valid_links(tmp) && !g_inf.stop)
+		else if (valid_links(tmp, -1) && !g_inf.stop)
 			NULL;
 		else if (tmp && g_inf.start && g_inf.end)
 			main2();

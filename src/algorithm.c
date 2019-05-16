@@ -16,7 +16,7 @@ void	handle_queue(int i)
 {
 	t_queue		*que;
 	t_neighbour	*neib;
-	
+
 	g_inf.kek = g_inf.num_ants;
 	create_queue(g_inf.start, 0, NULL);
 	que = g_que;
@@ -54,20 +54,7 @@ t_queue	*handle_queue2(t_neighbour *neib, t_queue *que)
 	}
 	if (que->lst == g_inf.end)
 	{
-		if (que->prev->lst == g_inf.start && g_inf.finished < g_inf.kek)
-		{
-			g_inf.finished++;
-			g_inf.num_ants--;
-			g_inf.steps++;
-			print_ant(g_inf.start->room, ++g_inf.ant_name);
-			write(1, "\n", 1);
-			if (g_inf.num_ants == 0)
-			{
-				write(1, "\nsteps: ", 8);
-				ft_putnbr(g_inf.steps);
-				exit (1);
-			}
-		}
+		que = handle_queue3(que);
 		create_ways(que);
 		que = clear_que();
 	}

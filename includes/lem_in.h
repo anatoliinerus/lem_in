@@ -78,7 +78,7 @@ t_ways					*g_ways;
 
 int						valid_rooms(char *str);
 void					lst_create(void);
-int						valid_links(char *str);
+int						valid_links(char *str, int i);
 void					links_create(char *a, char *b,
 						t_neighbour *tmp, t_lst *lmp);
 void					create_queue(t_lst *list, int i, t_queue *que);
@@ -100,6 +100,7 @@ int						check_ant(char *str);
 int						count(char * str);
 int						check_room(char *str);
 int						check_same(char *str1, char *str2);
+t_queue					*handle_queue3(t_queue *que);
 
 
 #endif
