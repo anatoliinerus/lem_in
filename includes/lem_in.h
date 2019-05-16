@@ -97,7 +97,7 @@ void					ft_lstcreate2(t_lst *new);
 t_queue					*handle_queue2(t_neighbour *neib, t_queue *que);
 void					main2(void);
 int						check_ant(char *str);
-int						count(char * str);
+int						count(char *str);
 int						check_room(char *str);
 int						check_same(char *str1, char *str2);
 t_queue					*handle_queue3(t_queue *que);
