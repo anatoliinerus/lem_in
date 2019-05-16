@@ -18,6 +18,7 @@
 
 typedef struct			s_info
 {
+	int					kek;
 	short int			stop;
 	short int			prot_start;
 	short int			main2;

@@ -16,6 +16,7 @@ int		main(void)
 {
 	char	*tmp;
 
+	g_inf.ant_name = 0;
 	g_inf.start10 = 1;
 	g_inf.end10 = 1;
 	while (get_next_line(0, &tmp) > 0 && !g_inf.stop)
