@@ -21,14 +21,16 @@ int	ft_main(char *tmp)
 		if (!check_ant(tmp))
 			return (0);
 	}
-	else if (!ft_strcmp(tmp, "##end") && !g_inf.end)
+	else if (!ft_strcmp(tmp, "##end") && !g_inf.end && !g_inf.valid_links)
 		g_inf.end10 = 0;
-	else if (!ft_strcmp(tmp, "##start") && !g_inf.start)
+	else if (!ft_strcmp(tmp, "##start") && !g_inf.start && !g_inf.valid_links)
 		g_inf.start10 = 0;
-	else if (valid_rooms(tmp) && !g_inf.stop)
+	else if (valid_rooms(tmp) && !g_inf.stop && !g_inf.valid_links)
 		lst_create();
-	else if (valid_links(tmp, -1) && !g_inf.stop)
-		NULL;
+	else if (valid_links(tmp, -1, NULL) && !g_inf.stop)
+	{
+		g_inf.valid_links = 1;
+	}
 	else if (tmp && g_inf.start && g_inf.end)
 		main2();
 	else

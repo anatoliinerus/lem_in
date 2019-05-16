@@ -18,6 +18,7 @@
 
 typedef struct			s_info
 {
+	short int			valid_links;
 	int					kek;
 	short int			stop;
 	short int			prot_start;
@@ -78,7 +79,7 @@ t_ways					*g_ways;
 
 int						valid_rooms(char *str);
 void					lst_create(void);
-int						valid_links(char *str, int i);
+int						valid_links(char *str, int i, char *argv1);
 void					links_create(char *a, char *b,
 						t_neighbour *tmp, t_lst *lmp);
 void					create_queue(t_lst *list, int i, t_queue *que);

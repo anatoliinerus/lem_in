@@ -12,13 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-int		valid_links(char *str, int i)
+int		valid_links(char *str, int i, char *argv1)
 {
-	char	*argv1;
-
 	if (count(str))
 		return (0);
-	i = -1;
 	if (ft_word_count(str, '-') != 2)
 		return (0);
 	while (str[++i] != '-')
@@ -34,7 +31,10 @@ int		valid_links(char *str, int i)
 		return (0);
 	}
 	if (!check_same(argv1, ft_strchr(str, '-') + 1))
+	{
 		g_inf.stop = 1;
+		return (0);
+	}
 	links_create(argv1, ft_strchr(str, '-') + 1, NULL, NULL);
 	links_create(ft_strchr(str, '-') + 1, argv1, NULL, NULL);
 	ft_strdel(&argv1);
