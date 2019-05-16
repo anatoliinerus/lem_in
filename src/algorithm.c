@@ -40,15 +40,18 @@ void	handle_queue(int i)
 
 t_queue	*handle_queue2(t_neighbour *neib, t_queue *que)
 {
+	t_lst *tmp;
+
 	while (neib != NULL)
 	{
-		if (find_lst(neib)->visited == 1 ||
-			find_lst(neib)->blocked == 1)
+		tmp = find_lst(neib);
+		if (tmp->visited == 1 ||
+			tmp->blocked == 1)
 			neib = neib->next;
 		else
 		{
-			create_queue(find_lst(neib), 1, que);
-			find_lst(neib)->visited = 1;
+			create_queue(tmp, 1, que);
+			tmp->visited = 1;
 			neib = neib->next;
 		}
 	}
