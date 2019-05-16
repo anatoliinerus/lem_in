@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-int	check_ant(char *tmp)
+int		check_ant(char *tmp)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ int	check_ant(char *tmp)
 	return (1);
 }
 
-int	count(char *str)
+int		count(char *str)
 {
 	int					i;
 	unsigned short int	count;
@@ -48,7 +48,7 @@ int	count(char *str)
 		return (0);
 }
 
-int	check_room(char *str)
+int		check_room(char *str)
 {
 	int		i;
 	t_lst	*tmp;
@@ -64,7 +64,7 @@ int	check_room(char *str)
 	return (0);
 }
 
-int	check_same(char *str1, char *str2)
+int		check_same(char *str1, char *str2)
 {
 	t_lst	*tmp;
 	int		a;
@@ -104,4 +104,3 @@ t_queue	*handle_queue3(t_queue *que)
 	}
 	return (que);
 }
-
