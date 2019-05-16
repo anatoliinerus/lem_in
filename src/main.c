@@ -21,28 +21,8 @@ int		main(void)
 	g_inf.end10 = 1;
 	while (get_next_line(0, &tmp) > 0 && !g_inf.stop)
 	{
-		if (tmp[0] == '#' && tmp[1] != '#')
-			NULL;
-		else if (!g_inf.num_ants && !g_inf.protect)
-		{
-			if (!check_ant(tmp))
-				return (0);
-		}
-		else if (!ft_strcmp(tmp, "##end") && !g_inf.end)
-			g_inf.end10 = 0;
-		else if (!ft_strcmp(tmp, "##start") && !g_inf.start)
-			g_inf.start10 = 0;
-		else if (valid_rooms(tmp) && !g_inf.stop)
-			lst_create();
-		else if (valid_links(tmp, -1) && !g_inf.stop)
-			NULL;
-		else if (tmp && g_inf.start && g_inf.end)
-			main2();
-		else
-		{
-			write(1, "ERROR\n", 6);
+		if (!ft_main(tmp))
 			return (0);
-		}
 		ft_putstr(tmp);
 		write(1, "\n", 1);
 		ft_strdel(&tmp);
@@ -97,10 +77,7 @@ void	create_queue(t_lst *list, int i, t_queue *que)
 	t_queue *tmp;
 	t_queue *new;
 
-	if (i == 1)
-		list->visited = 1;
-	else
-		list->visited = 0;
+	list->visited = (i == 1) ? 1 : 0;
 	if (!g_que)
 	{
 		g_que = ft_memalloc(sizeof(t_queue));

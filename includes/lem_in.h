@@ -101,6 +101,6 @@ int						count(char * str);
 int						check_room(char *str);
 int						check_same(char *str1, char *str2);
 t_queue					*handle_queue3(t_queue *que);
-
+int						ft_main(char *tmp);
 
 #endif
