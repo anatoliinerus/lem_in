@@ -1,1 +1,3 @@
-# lem_in
+# Lem_in
+
+Pathfinding algorithm game
